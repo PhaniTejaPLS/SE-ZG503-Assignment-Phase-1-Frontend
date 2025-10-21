@@ -13,7 +13,7 @@ function App() {
       <div>
         <NavBarComponent />
       </div>
-      <div>
+      <div className="homepage-root-container">
         <HomepageRoot />
       </div>
     </>

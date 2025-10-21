@@ -68,9 +68,9 @@ export function NavBarComponent() {
                 </div>
                 <div className="nav-bar-searchbar-root">
                     <div className="nav-bar-searchbar" >
-                        <form class="d-flex" role="search">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-light button-border " type="submit">
+                        <form className="d-flex" role="search">
+                            <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-light button-border " type="submit">
                                 <i className="bi bi-search"></i>
                             </button>
                         </form>
