@@ -8,16 +8,16 @@ export function EquipmentPage({ tag, title }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        async function fetchEquipmentByTag() {
+        async function fetchEquipment() {
             try {
-                const response = await equipmentService.getEquipmentByTag(tag);
+                const response = await equipmentService.getAllEquipment();
                 setEquipmentList(response.data);
             } catch (error) {
                 console.error("Error fetching equipment by tag:", error);
             }
         }
-        fetchEquipmentByTag();
-    }, [tag])
+        fetchEquipment();
+    }, [])
 
     const renderPageTitle = (tag) => {
         switch (tag) {
@@ -35,9 +35,19 @@ export function EquipmentPage({ tag, title }) {
     }
 
 
-  const  useSearchBasedOnInput = (searchString) => {
-      
+
+    const useSearchBasedOnInput = (searchString) => {
+        (async () => {
+            try {
+                const response = await equipmentService.getEquipmentByTag(tag, searchString);
+                setEquipmentList(response.data);
+                setSearchTerm('')
+            } catch (error) {
+                console.error("Error fetching equipment by tag and search:", error);
+            }
+        })();
     };
+
 
 
     return (
@@ -53,14 +63,14 @@ export function EquipmentPage({ tag, title }) {
                         placeholder=".form-control-sm"
                         aria-label=".form-control-sm example"
                         value={searchTerm}
-                        onChange={(searchEvent) => setSearchTerm(searchEvent.target.value) }
-                        onKeyDown={(keyEvent) => {if (keyEvent.key === 'Enter') useSearchBasedOnInput(searchTerm)  }  }
+                        onChange={(searchEvent) => setSearchTerm(searchEvent.target.value)}
+                        onKeyDown={(keyEvent) => { if (keyEvent.key === 'Enter') useSearchBasedOnInput(searchTerm) }}
                     />
                     <div className="search-icon" onClick={() => useSearchBasedOnInput(searchTerm)}>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
                     </div>
 
                     <div className="filter" onClick={() => console.log("Filter Clicked")}>

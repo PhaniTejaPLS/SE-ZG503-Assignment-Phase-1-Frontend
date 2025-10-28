@@ -11,8 +11,8 @@ export const equipmentService = {
         return 0;
     },
 
-    getEquipmentByTag: async (tag) =>{
-        return await httpClient.get(`/equipment?tag=${tag}`);
+    getEquipmentByTag: async (tag,searchString) =>{
+        return await httpClient.get(`/equipment?tag=${tag}&name=${searchString}`);
     }
 
 

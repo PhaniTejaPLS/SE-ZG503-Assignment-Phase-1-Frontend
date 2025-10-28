@@ -20,7 +20,8 @@ export function TableComponent({equipmentList, tag}) {
             </thead>
             <tbody>
                 {
-                    equipmentList.filter((equipmentItem) => equipmentItem.tag === tag)
+                    equipmentList
+                    .filter((equipmentItem) => equipmentItem.tag === tag)
                     .map((equipmentListItem) => {
                         return (
                             <tr key={equipmentListItem.id}>
