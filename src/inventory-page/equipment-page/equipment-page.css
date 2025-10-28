@@ -1,0 +1,48 @@
+.table-list{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+
+h2 {
+    /* margin-left: 3rem; */
+    text-align: center;
+}
+
+.filter {
+  width: 31px;
+  height: 31px;
+  display: flex;
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+  cursor: pointer;
+  border-radius: 5px; 
+}
+
+span{
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-bar{
+    margin-bottom:0.5rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+
+}
+
+.search-bar input{
+    width:25%;
+}
+
+.search-icon{
+    cursor: pointer;
+    width: 31px;
+  height: 31px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;      
+  
+  border-radius: 5px; 
+}

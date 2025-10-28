@@ -1,13 +1,6 @@
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import './nav-bar.component.css';
 
+
+import './nav-bar.component.css';
 export function NavBarComponent() {
     return (
         // <Navbar className="bg-body-tertiary justify-content-between header-padding" >
@@ -57,9 +50,11 @@ export function NavBarComponent() {
                     <div className="nav-bar-logo">
                         <span>
                             <img
-                                src="src/assets/logo.svg"
+                                src='/logo.svg'
                                 width="60"
-                                height="60"></img>
+                                height="60"
+                                alt="University Inventory Logo"
+                            />
                         </span>
                     </div>
                     <div className="nav-bar-logo-header" >

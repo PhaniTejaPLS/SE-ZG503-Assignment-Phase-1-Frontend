@@ -1,9 +1,12 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './card.component.css';
+import { useNavigate } from 'react-router';
 
 
 function CardComponent({ title, imgSrc, description, tag }) {
+
+    const navigate = useNavigate();
 
     const renderIcon = () => {
         switch (tag) {
@@ -61,10 +64,32 @@ function CardComponent({ title, imgSrc, description, tag }) {
         }
     }
 
+    const redirectToPage = () =>{
+        switch (tag) {
+            case 'lab': 
+                navigate('/inventory/labs');
+                break;
+            case 'sport':
+                navigate('/inventory/sports');
+                break;
+            case 'electronics':
+                navigate('/inventory/electronics');
+                break;
+            case 'music':
+                navigate('/inventory/music');
+                break;
+            case 'furniture':
+                navigate('/inventory/furniture');
+                break;
+        }
+    }
+
 
     return (
         <>
-            <div className='card w-25 mb-3 card-size-text'>
+            <div className='card w-25 mb-3 card-size-text' 
+                onClick={redirectToPage}
+            >
                 <div className='card-logo'>
                     {renderIcon()}
                 </div>
