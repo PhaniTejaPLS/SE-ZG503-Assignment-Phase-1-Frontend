@@ -46,3 +46,25 @@ span{
   
   border-radius: 5px; 
 }
+
+.filter-collapse{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filteralignment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8rem;
+}
+
+.col-auto{
+    margin-top: 1rem;
+}
+
+.col-sm-4{
+    width: 15% !important;
+}
+
