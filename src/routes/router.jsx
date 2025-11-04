@@ -4,6 +4,7 @@ import HomepageRoot from "../homepage/homepage-root.jsx";
 import { InventoryPageRoot } from "../inventory-page/inventory-root.jsx";
 import { EquipmentPage } from "../inventory-page/equipment-page/equipment-page.component.jsx";
 import RootLayout from "../RootLayout.jsx";
+import { CartComponent } from "../cart/cart-root.component.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
                         element: <InventoryPageRoot tag="furniture" />
                     }
                 ]
+            },
+            {
+                path: "/cart",
+                element: <CartComponent />
             }
 
         ]

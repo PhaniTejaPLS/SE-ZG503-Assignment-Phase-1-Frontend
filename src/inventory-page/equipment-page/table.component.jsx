@@ -1,8 +1,28 @@
 
 import "./table.component.css";
+import { useCart } from "../../CartContext";
+import { useEffect } from "react";
 
 
 export function TableComponent({equipmentList, tag}) {
+
+
+    const { cartItems, addToCart, removeFromCart } = useCart();
+
+    useEffect(() => {
+        console.log(cartItems);
+    }, [cartItems]);
+
+    const addEquipmentToCart = (event) => {
+        const equipmentId = event.target.value;
+        console.log("Equipment ID to add to cart:", JSON.parse(equipmentId));
+        console.log("Checkbox state:", event.target.checked);
+        if(event.target.checked){
+            addToCart(equipmentId);
+        }else{
+            removeFromCart(equipmentId);
+        }
+    }
 
 
 
@@ -16,6 +36,7 @@ export function TableComponent({equipmentList, tag}) {
                     <th scope="col">Condition</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Available Quantity</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +52,18 @@ export function TableComponent({equipmentList, tag}) {
                                 <td>{equipmentListItem.condition}</td>
                                 <td>{equipmentListItem.quantity}</td>
                                 <td>{equipmentListItem.availablequantity}</td>
+                                <td>
+                                    <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value={equipmentListItem}
+                                        id={`checkDefault-${equipmentListItem.id}`}
+                                        onChange={(e)=>{addEquipmentToCart(e)}}
+                                    />
+
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })

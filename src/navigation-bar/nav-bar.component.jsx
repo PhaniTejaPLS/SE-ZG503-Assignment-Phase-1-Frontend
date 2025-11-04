@@ -70,6 +70,11 @@ export function NavBarComponent() {
                             </button>
                         </form>
                     </div>
+                    <div className="button-cart">
+                        <button className="btn btn-outline-light button-border " type="submit">
+                                <i className="bi bi-cart"></i>
+                        </button>
+                    </div>
                     <div className="nav-bar-profile-icon">
                        <i className="bi bi-person-circle profileicon "></i>
                     </div>

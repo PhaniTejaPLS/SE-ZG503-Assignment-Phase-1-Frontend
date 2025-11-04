@@ -2,12 +2,15 @@ import { equipmentService } from "../../services/equipment.service.js"
 import { useState, useEffect } from "react";
 import { TableComponent } from "./table.component.jsx";
 import './equipment-page.css';
+import { useNavigate } from "react-router";
 
 export function EquipmentPage({ tag, title }) {
     const [equipmentList, setEquipmentList] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [rangeValue, setRangeValue] = useState(50);
     const [conditionFilter, setConditionFilter] = useState("all");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchEquipment() {
@@ -60,6 +63,11 @@ export function EquipmentPage({ tag, title }) {
                 console.error("Error fetching equipment by tag and filter:", error);
             }
         })();
+    }
+
+    const handleSubmit = () =>{
+        navigate('/cart');
+    
     }
 
 
@@ -147,6 +155,14 @@ export function EquipmentPage({ tag, title }) {
                 </div>
                 <div className="table-list">
                     <TableComponent equipmentList={equipmentList} tag={tag} />
+                    <div className="equip-submit">
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-lg"
+                            onClick={handleSubmit}
+                            
+                            >Submit</button>
+                    </div>
                 </div>
             </div>
         </>
