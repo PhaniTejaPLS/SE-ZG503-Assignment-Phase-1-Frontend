@@ -9,16 +9,18 @@ export function TableComponent({equipmentList, tag}) {
 
     const { cartItems, addToCart, removeFromCart } = useCart();
 
+    console.log("Current Cart Items:", cartItems);
+
     useEffect(() => {
         console.log(cartItems);
     }, [cartItems]);
 
     const addEquipmentToCart = (event) => {
-        const equipmentId = event.target.value;
-        console.log("Equipment ID to add to cart:", JSON.parse(equipmentId));
+        const equipmentId = parseInt(event.target.value); 
         console.log("Checkbox state:", event.target.checked);
         if(event.target.checked){
-            addToCart(equipmentId);
+            const selectedEquipment = equipmentList.find(item => item.id === equipmentId);
+            addToCart(selectedEquipment);
         }else{
             removeFromCart(equipmentId);
         }
@@ -57,7 +59,7 @@ export function TableComponent({equipmentList, tag}) {
                                     <input
                                         className="form-check-input"
                                         type="checkbox"
-                                        value={equipmentListItem}
+                                        value={equipmentListItem.id}
                                         id={`checkDefault-${equipmentListItem.id}`}
                                         onChange={(e)=>{addEquipmentToCart(e)}}
                                     />

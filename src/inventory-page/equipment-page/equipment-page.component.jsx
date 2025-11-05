@@ -74,7 +74,15 @@ export function EquipmentPage({ tag, title }) {
 
     return (
         <>
-            <h2>{renderPageTitle(tag)}</h2>
+            <div className="d-flex align-items-center justify-content-between position-relative py-3">
+                <button className="btn btn-outline-light button-border" onClick={()=> navigate(-1)} >
+                        <i className="bi bi-arrow-left"></i>
+                </button>
+                <h2 className="position-absolute start-50 translate-middle-x text-center text-light ms-3">
+                    {renderPageTitle(tag)}
+                </h2>
+                <div style={{ width: '50px' }}></div>
+            </div>
 
             <div className="container-sm">
                 <div className="search-bar">

@@ -1,0 +1,18 @@
+.cart-root {
+
+    text-align: center;
+    margin: 6rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+}
+
+.qty-input{
+    width: 80px;
+    margin: auto;
+}
+
+h2 {
+    /* margin-left: 3rem; */
+    text-align: center;
+}
