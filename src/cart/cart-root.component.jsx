@@ -1,6 +1,7 @@
 import './cart-root.component.css';
 import { useCart } from '../CartContext.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
+import { useNavigate } from 'react-router';
 import { borrowRequestService } from '../services/borrow-request.service.js';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,6 +11,9 @@ export const CartComponent = () =>{
     const reqId = 5;
     const borrowRequestId = 'item-12345'; // Placeholder for borrow request identification
     const { cartItems, removeFromCart } = useCart();
+
+
+    const navigate = useNavigate();
     
     const [userRequest, setUserRequest] = useState({
         id: reqId,
@@ -171,7 +175,8 @@ export const CartComponent = () =>{
                 <div className='cart-submit'>
                     <input class="btn btn-primary" type="submit" value="Submit"
                             onClick={()=>{
-                                submitUserRequest()
+                                submitUserRequest();
+                                navigate('/home');
                             }}
                     
                     ></input>

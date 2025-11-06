@@ -1,7 +1,11 @@
 
 
 import './nav-bar.component.css';
+import { useNavigate } from 'react-router-dom';
 export function NavBarComponent() {
+
+    const navigate = useNavigate();
+
     return (
         // <Navbar className="bg-body-tertiary justify-content-between header-padding" >
         //     <Navbar className="bg-body-tertiary">
@@ -71,7 +75,9 @@ export function NavBarComponent() {
                         </form>
                     </div>
                     <div className="button-cart">
-                        <button className="btn btn-outline-light button-border " type="submit">
+                        <button className="btn btn-outline-light button-border "
+                            onClick={()=> navigate('/cart')}
+                        >
                                 <i className="bi bi-cart"></i>
                         </button>
                     </div>

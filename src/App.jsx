@@ -13,10 +13,6 @@ function App() {
   return (
     <>
     <CartProvider>
-      
-      <div>
-        <NavBarComponent />
-      </div>
 
       <div className="app-router-container">
         <RouterProvider router={router} />

@@ -73,7 +73,7 @@ export function EquipmentPage({ tag, title }) {
 
     return (
         <>
-            <div className="d-flex align-items-center justify-content-between position-relative py-3">
+            <div className="d-flex align-items-center justify-content-around position-relative py-3">
                 <button className="btn btn-outline-light button-border" onClick={()=> navigate(-1)} >
                         <i className="bi bi-arrow-left"></i>
                 </button>
@@ -168,7 +168,7 @@ export function EquipmentPage({ tag, title }) {
                             class="btn btn-primary btn-lg"
                             onClick={handleSubmit}
                             
-                            >Submit</button>
+                            >Go To Cart</button>
                     </div>
                 </div>
             </div>
