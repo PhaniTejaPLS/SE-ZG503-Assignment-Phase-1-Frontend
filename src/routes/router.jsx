@@ -5,6 +5,8 @@ import { InventoryPageRoot } from "../inventory-page/inventory-root.jsx";
 import { EquipmentPage } from "../inventory-page/equipment-page/equipment-page.component.jsx";
 import RootLayout from "../RootLayout.jsx";
 import { CartComponent } from "../cart/cart-root.component.jsx";
+import { ProtectedRoute } from "../ProtectedRoute.jsx";
+import { LoginComponent } from "../login/login.component.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -17,40 +19,66 @@ export const router = createBrowserRouter([
                 element: <Navigate to="/home" replace />
             },
             {
-                path: "home",
-                element: <HomepageRoot />
+                // path: "home",
+                // element: <HomepageRoot />
+                element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                children: [
+                    { path: "home", element: <HomepageRoot /> }            
+                ]
             },
             {
                 path: "inventory",
                 children: [
                     {
                         path:"labs",
-                        element: <InventoryPageRoot tag="lab" />
+                        // element: <InventoryPageRoot tag="lab" />
+                        element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { element: <InventoryPageRoot tag="lab" /> },
+                        ]
                     },
                     {
                         path:"sports",
-                        element: <InventoryPageRoot tag="sports" />
+                        element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { element: <InventoryPageRoot tag="sports" /> },
+                        ]
                     },
                     {
                         path:"electronics",
-                        element: <InventoryPageRoot tag="electronics" />
+                        element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { element: <InventoryPageRoot tag="electronics" /> },
+                        ]
                     },
                     {
                         path:"music",
-                        element: <InventoryPageRoot tag="music" />
+                        element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { element: <InventoryPageRoot tag="music" /> },
+                        ]
                     },
                     {
                         path:"furniture",
-                        element: <InventoryPageRoot tag="furniture" />
+                        element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { element: <InventoryPageRoot tag="furniture" /> },
+                        ]
                     }
                 ]
             },
             {
-                path: "/cart",
-                element: <CartComponent />
+                path: "cart",
+                element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
+                        children: [
+                            { path: "", element: <CartComponent /> },
+                        ]
             }
 
         ]
         
+    },
+    {
+        path: "/login", element: <LoginComponent />
     }
 ])

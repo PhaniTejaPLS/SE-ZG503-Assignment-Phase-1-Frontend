@@ -1,5 +1,5 @@
 import './cart-root.component.css';
-import { useCart } from '../CartContext.jsx';
+import { useCart } from '../Contexts/CartContext.jsx';
 import { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import { borrowRequestService } from '../services/borrow-request.service.js';

@@ -1,6 +1,6 @@
 
 import "./table.component.css";
-import { useCart } from "../../CartContext";
+import { useCart } from "../../Contexts/CartContext";
 import { useEffect } from "react";
 
 
