@@ -76,7 +76,7 @@ return (
                     </div>
 
                     <div className="login-button-section">
-                        <button className="btn btn-primary login-button"
+                        <button className="btn btn-primary login-button" type="submit"
                             onClick={handleLogin}
                         >
                             Login

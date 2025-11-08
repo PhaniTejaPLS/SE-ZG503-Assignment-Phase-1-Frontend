@@ -44,6 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .profileicon{
@@ -70,4 +71,9 @@
 .button-cart{
     display: flex;
     align-items: center;
+}
+
+
+.modal-body{
+    text-align: center;
 }

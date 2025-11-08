@@ -7,6 +7,7 @@ import RootLayout from "../RootLayout.jsx";
 import { CartComponent } from "../cart/cart-root.component.jsx";
 import { ProtectedRoute } from "../ProtectedRoute.jsx";
 import { LoginComponent } from "../login/login.component.jsx";
+import { StudentRequestPageComponent } from "../console-pages/student/student-request.component.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -34,35 +35,35 @@ export const router = createBrowserRouter([
                         // element: <InventoryPageRoot tag="lab" />
                         element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
                         children: [
-                            { element: <InventoryPageRoot tag="lab" /> },
+                            { path:'', element: <InventoryPageRoot tag="lab" /> },
                         ]
                     },
                     {
                         path:"sports",
                         element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
                         children: [
-                            { element: <InventoryPageRoot tag="sports" /> },
+                            { path:'', element: <InventoryPageRoot tag="sports" /> },
                         ]
                     },
                     {
                         path:"electronics",
                         element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
                         children: [
-                            { element: <InventoryPageRoot tag="electronics" /> },
+                            { path:'', element: <InventoryPageRoot tag="electronics" /> },
                         ]
                     },
                     {
                         path:"music",
                         element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
                         children: [
-                            { element: <InventoryPageRoot tag="music" /> },
+                            { path:'', element: <InventoryPageRoot tag="music" /> },
                         ]
                     },
                     {
                         path:"furniture",
                         element: <ProtectedRoute allowedRoles={['admin', 'student', 'staff']} />,
                         children: [
-                            { element: <InventoryPageRoot tag="furniture" /> },
+                            { path:'', element: <InventoryPageRoot tag="furniture" /> },
                         ]
                     }
                 ]
@@ -73,6 +74,15 @@ export const router = createBrowserRouter([
                         children: [
                             { path: "", element: <CartComponent /> },
                         ]
+            },
+            {
+                path:"student",
+                element: <ProtectedRoute allowedRoles={['admin','staff','student']} />,
+                children:[
+                    {
+                        path:"requests", element: <StudentRequestPageComponent />
+                    }
+                ]
             }
 
         ]
@@ -80,5 +90,5 @@ export const router = createBrowserRouter([
     },
     {
         path: "/login", element: <LoginComponent />
-    }
+    },
 ])

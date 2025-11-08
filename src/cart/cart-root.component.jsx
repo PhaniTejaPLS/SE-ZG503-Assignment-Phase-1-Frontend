@@ -4,10 +4,15 @@ import { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import { borrowRequestService } from '../services/borrow-request.service.js';
 import { v4 as uuidv4 } from 'uuid';
+import { useAuth } from '../Contexts/AuthContext.jsx';
 
 
 export const CartComponent = () =>{
-    const userId = 2; // Placeholder for user identification
+
+    const { user } = useAuth(); 
+
+
+    const userId = user.id; // Placeholder for user identification
     const reqId = 5;
     const borrowRequestId = 'item-12345'; // Placeholder for borrow request identification
     const { cartItems, removeFromCart } = useCart();
@@ -66,6 +71,12 @@ export const CartComponent = () =>{
                 });
         }
 
+        const parseDateFromInput = (yyyyMmDd) => {
+        if (!yyyyMmDd) return null;
+        const [y, m, d] = yyyyMmDd.split('-').map(Number);
+        return new Date(y, m - 1, d); // monthIndex is 0-based
+    };
+
     return(
         <>
         <h2>Bill of Materials</h2>
@@ -110,7 +121,7 @@ export const CartComponent = () =>{
                                                         ...prevRequest,
                                                         items: (prevRequest.items || []).map((item) =>
                                                             item.equipmentId === cartItem.id
-                                                                ? { ...item, borrowDate: updatedBorrowDate }
+                                                                ? { ...item, borrowDate: parseDateFromInput(updatedBorrowDate) }
                                                                 : item
                                                         )
                                                     }));
@@ -128,7 +139,7 @@ export const CartComponent = () =>{
                                                         ...prevRequest,
                                                         items: (prevRequest.items || []).map((item) =>
                                                             item.equipmentId === cartItem.id
-                                                                ? { ...item, returnDate: updatedReturnDate }
+                                                                ? { ...item, returnDate: parseDateFromInput(updatedReturnDate) }
                                                                 : item
                                                         )
                                                     }));

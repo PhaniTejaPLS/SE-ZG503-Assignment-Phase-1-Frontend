@@ -1,10 +1,27 @@
 
 
+import { useAuth } from '../Contexts/AuthContext';
 import './nav-bar.component.css';
 import { useNavigate } from 'react-router-dom';
 export function NavBarComponent() {
 
+    const { user, logout } = useAuth();
+
     const navigate = useNavigate();
+
+
+    const handleLogout = () =>{
+        logout();
+        navigate('/login');
+    }
+
+    const handleMyRequests = () => {
+        navigate('/student/requests');
+    }
+
+    const redirectToAdminConsole = () =>{
+        navigate('/admin/console')
+    }
 
     return (
         // <Navbar className="bg-body-tertiary justify-content-between header-padding" >
@@ -81,12 +98,63 @@ export function NavBarComponent() {
                                 <i className="bi bi-cart"></i>
                         </button>
                     </div>
-                    <div className="nav-bar-profile-icon">
+                    <button className="btn btn-dark nav-bar-profile-icon" 
+                        data-bs-toggle="modal"
+                        data-bs-target="#profileModal"
+                        onClick={{}}
+                    >
                        <i className="bi bi-person-circle profileicon "></i>
-                    </div>
+                    </button>
                 </div>
 
             </div>
+
+
+            <div className="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Profile</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+</svg>
+                            <br />
+                            <br />
+                            <h4>{user.email}</h4>
+                            <br />
+                            <br />
+                            <p><strong>Role:</strong>  {user.role}</p>
+                            <br />
+                            
+                            <button type="button" className="btn btn-outline-light"
+                                data-bs-dismiss="modal"
+                                onClick={handleMyRequests}
+                            >My Requests</button>
+
+                            <button type="button" className="btn btn-outline-light"
+                                data-bs-dismiss="modal"
+                                onClick={{}}
+                            >Admin Console</button>
+                             
+
+
+                        </div>
+                        <div className="modal-footer">
+                            <button className="btn btn-outline-danger" data-bs-dismiss="modal"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </>
     )
 }
