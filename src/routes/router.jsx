@@ -8,6 +8,7 @@ import { CartComponent } from "../cart/cart-root.component.jsx";
 import { ProtectedRoute } from "../ProtectedRoute.jsx";
 import { LoginComponent } from "../login/login.component.jsx";
 import { StudentRequestPageComponent } from "../console-pages/student/student-request.component.jsx";
+import { AdminConsoleComponent } from "../console-pages/admin/AdminConsole.component.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -81,6 +82,18 @@ export const router = createBrowserRouter([
                 children:[
                     {
                         path:"requests", element: <StudentRequestPageComponent />
+                    }
+                ]
+            },
+            {
+                path:"admin",
+                element: <ProtectedRoute allowedRoles={['admin']} />,
+                children:[
+                    {
+                        path:"console/edit", element: <AdminConsoleComponent tag={'edit-inv'} />
+                    },
+                    {
+                        path:"console/request", element: <AdminConsoleComponent tag={'approve-req'} />
                     }
                 ]
             }

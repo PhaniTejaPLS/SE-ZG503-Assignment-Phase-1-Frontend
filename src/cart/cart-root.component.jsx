@@ -15,7 +15,7 @@ export const CartComponent = () =>{
     const userId = user.id; // Placeholder for user identification
     const reqId = 5;
     const borrowRequestId = 'item-12345'; // Placeholder for borrow request identification
-    const { cartItems, removeFromCart } = useCart();
+    const { cartItems, removeFromCart, clearCart } = useCart();
 
 
     const navigate = useNavigate();
@@ -64,6 +64,7 @@ export const CartComponent = () =>{
         console.log('Submitting user request:', userRequest);
             borrowRequestService.submitBorrowRequest(userRequest)
                 .then((response) => {
+                    clearCart();
                     console.log('Borrow request submitted successfully:', response.data);
                 })
                 .catch((error) => {

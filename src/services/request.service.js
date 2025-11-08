@@ -18,6 +18,15 @@ export const requestService = {
 
     deleteRequestById: (requestId) =>{
         return httpClient.delete(`/request/${requestId}`)
+    },
+
+    approveRequestById: (requestId, status) =>{
+        return httpClient.patch(`/request/${requestId}`, {
+            status:status,
+            approvalDate: new Date(Date.now())
+        });
     }
+    
+
 
 }

@@ -19,8 +19,12 @@ export function NavBarComponent() {
         navigate('/student/requests');
     }
 
-    const redirectToAdminConsole = () =>{
-        navigate('/admin/console')
+    const redirectToAdminConsoleEditInventory = () =>{
+        navigate('/admin/console/edit')
+    }
+
+    const redirectToAdminConsoleApproveReq = () =>{
+        navigate('/admin/console/request')
     }
 
     return (
@@ -135,10 +139,23 @@ export function NavBarComponent() {
                                 onClick={handleMyRequests}
                             >My Requests</button>
 
-                            <button type="button" className="btn btn-outline-light"
+                            {   user.role === 'admin' &&(
+                                <>
+                                <button type="button" className="btn btn-outline-light admin-console-button"
                                 data-bs-dismiss="modal"
-                                onClick={{}}
-                            >Admin Console</button>
+                                onClick={redirectToAdminConsoleEditInventory}
+                                >Edit Inventory</button>
+
+                            <button type="button" className="btn btn-outline-light admin-console-button"
+                                data-bs-dismiss="modal"
+                                onClick={redirectToAdminConsoleApproveReq}
+                                >Approve Requests</button>
+                                </>
+                                
+                        )
+
+                            }
+                            
                              
 
 

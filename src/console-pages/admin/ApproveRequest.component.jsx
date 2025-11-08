@@ -1,87 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../Contexts/AuthContext.jsx";
-import { requestService } from "../../services/request.service.js";
-import "./student.request.component.css"
+import { useEffect, useState } from "react"
+import { requestService } from "../../services/request.service";
+import { useAuth } from "../../Contexts/AuthContext";
 
-export const StudentRequestPageComponent = () => {
+
+export function ApproveRequestComponent(){
 
     const [requests, setRequests] = useState([]);
-    const [requestDetails, setRequestDetails] = useState([]);
+    const [requestsDetails, setRequestDetails] = useState([]);
     const { user } = useAuth();
 
-    async function fetchRequestsForCurrentUser() {
-        try {
-            console.log('Fetch')
-            const response = await requestService.getRequestByUser(user.id);
+    async function fetchAllRequests(){
+            const response = await requestService.getAllRequests();
             setRequests(response.data);
-        } catch (error) {
-            console.error("Error fetching requests:", error);
         }
-    }
-    useEffect(() => {
-        fetchRequestsForCurrentUser();
-    }, [user.id])
 
-    const getRequestDetails = async (requestId) => {
-        try {
-            const response = await requestService.getRequestDetailsById(requestId);
+    useEffect(()=>{
+
+        
+        fetchAllRequests();
+    },[user.id]);
+
+    const changeStatusofRequest = async(requestId,status) =>{
+        try{
+            const response  = await requestService.approveRequestById(requestId,status);
+            fetchAllRequests();
             console.log(response.data)
-            setRequestDetails(response.data);
-            fetchRequestsForCurrentUser();
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
     }
 
     const cancelRequest = async (requestId) => {
-        try {
-            const response = await requestService.deleteRequestById(requestId);
-            fetchRequestsForCurrentUser()
-        }catch (err) {
-            console.log(err)
+            try {
+                const response = await requestService.deleteRequestById(requestId);
+                fetchAllRequests()
+            }catch (err) {
+                console.log(err)
+            }
         }
-    }
+
+
+    const getRequestDetails = async (requestId) => {
+            try {
+                const response = await requestService.getRequestDetailsById(requestId);
+                console.log(response.data)
+                setRequestDetails(response.data);
+                fetchAllRequests();
+            }catch(err){
+                console.log(err)
+            }
+        }
 
 
     return (
         <>
-
-            <div>
-                <h1>My Requests </h1>
-            </div>
-
-            {/* <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>@social</td>
-                    </tr>
-                </tbody>
-            </table> */
-                <>
-                    <div className="request-table">
                         <table className="table table-dark table-hover">
                             <thead>
 
@@ -89,6 +61,7 @@ export const StudentRequestPageComponent = () => {
                                     <th className="table-dark" scope="col">Request ID</th>
                                     <th className="table-dark" scope="col">Request Date</th>
                                     <th className="table-dark" scope="col">Status</th>
+                                    <th className="table-dark" scope="col">Action</th>
                                     <th className="table-dark" scope="col">Details</th>
                                     <th className="table-dark" scope="col"></th>
                                 </tr>
@@ -108,6 +81,25 @@ export const StudentRequestPageComponent = () => {
                                                     minute: '2-digit'
                                                 })}</td>
                                                 <td className="table-dark">{request.status}</td>
+                                                <td>
+                                                    {
+                                                        request.status === 'pending'  ?(
+                                                            <button
+                                                            className="btn btn-outline-light btn-sm"
+                                                            onClick={() => changeStatusofRequest(request.id,'approved')}
+                                                        >
+                                                            Approve
+                                                        </button>
+                                                        ):
+                                                        new Date(request.requestDate).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    hour: '2-digit',
+                                                    minute: '2-digit'
+                                                })
+                                                    }
+                                                </td>
                                                 <td>
                                                     <button
                                                             className="btn btn-outline-light btn-sm"
@@ -147,8 +139,6 @@ export const StudentRequestPageComponent = () => {
                                 }
                             </tbody>
                         </table>
-                    </div>
-
                 
                     <div className="modal fade" id="requestDetails"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -169,7 +159,7 @@ export const StudentRequestPageComponent = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            requestDetails.map((requestItem)=>{
+                                            requestsDetails.map((requestItem)=>{
                                                 return (
                                                    <tr>
                                                     <td>{requestItem.equipmentName}</td>
@@ -204,10 +194,9 @@ export const StudentRequestPageComponent = () => {
 
                 </>
 
-            }
-        </>
+            
+        
 
     )
-
 
 }
