@@ -1,0 +1,7 @@
+.card-grid-root {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8rem;
+    justify-content: center;
+}

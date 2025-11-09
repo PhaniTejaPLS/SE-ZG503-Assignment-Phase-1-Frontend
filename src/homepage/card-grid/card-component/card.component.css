@@ -1,0 +1,13 @@
+.card-size-text{
+    text-align: right;
+
+}
+
+.card-size-text:hover{
+        cursor: pointer;
+        background-color: var(--bs-tertiary-bg)
+}
+
+.card-logo{
+    margin: 2rem 2rem 0 0
+}
